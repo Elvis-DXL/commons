@@ -1,6 +1,6 @@
 package com.elvis.commons.anno;
 
-import com.elvis.commons.enums.JTTypeEnum;
+import com.elvis.common.enums.JTTypeEnum;
 
 import java.lang.annotation.*;
 

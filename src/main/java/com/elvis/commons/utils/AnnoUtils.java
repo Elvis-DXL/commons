@@ -1,9 +1,9 @@
 package com.elvis.commons.utils;
 
 import com.alibaba.fastjson.JSONObject;
-import com.elvis.commons.anno.JsonTransform;
-import com.elvis.commons.anno.ListMerge;
-import com.elvis.commons.enums.JTTypeEnum;
+import com.elvis.common.anno.JsonTransform;
+import com.elvis.common.anno.ListMerge;
+import com.elvis.common.enums.JTTypeEnum;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
