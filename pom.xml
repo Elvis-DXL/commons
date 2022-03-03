@@ -8,6 +8,7 @@
     <artifactId>commons</artifactId>
     <version>1.0-RELEASE</version>
 
+    <!--以下待随时更新-->
     <dependencies>
         <dependency>
             <groupId>org.projectlombok</groupId>
