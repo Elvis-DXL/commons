@@ -1,6 +1,6 @@
 package com.elvis.commons.utils;
 
-import com.elvis.common.pojo.TreeNode;
+import com.elvis.commons.pojo.TreeNode;
 
 import java.util.ArrayList;
 import java.util.HashMap;
