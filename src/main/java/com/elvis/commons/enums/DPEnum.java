@@ -6,7 +6,9 @@ package com.elvis.commons.enums;
  */
 public enum DPEnum {
     //枚举定义
-    yyyy_MM_dd(""),;
+    yyyy_MM_dd(""),
+    HH_mm_ss(""),
+    yyyy_MM_dd_HH_mm_ss(""),;
 
     private final String pattern;
 
