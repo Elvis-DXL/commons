@@ -58,20 +58,4 @@ public final class TreeNode implements Serializable {
         this.self = self;
     }
 
-    public TreeNode(String id, String parentId, String name, String type, boolean isLeaf) {
-        this.id = id;
-        this.parentId = parentId;
-        this.name = name;
-        this.type = type;
-        this.isLeaf = isLeaf;
-    }
-
-    public TreeNode(String id, String parentId, String name, String type, boolean isLeaf, Object self) {
-        this.id = id;
-        this.parentId = parentId;
-        this.name = name;
-        this.type = type;
-        this.isLeaf = isLeaf;
-        this.self = self;
-    }
 }

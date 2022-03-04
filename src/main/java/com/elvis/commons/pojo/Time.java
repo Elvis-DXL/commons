@@ -16,7 +16,7 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@ApiModel(value = "Time|时间对象")
+@ApiModel("Time|时间对象")
 public class Time implements Serializable {
 
     @ApiModelProperty("开始时间")

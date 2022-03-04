@@ -15,7 +15,7 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@ApiModel(value = "Item|项对象")
+@ApiModel("Item|项对象")
 public final class Item<T> implements Serializable {
 
     @ApiModelProperty("标签")

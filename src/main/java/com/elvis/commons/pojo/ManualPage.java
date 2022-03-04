@@ -13,7 +13,7 @@ import java.util.List;
  * @since : 2020/9/21 15:01
  */
 @Data
-@ApiModel(value = "ManualPage|手动分页对象")
+@ApiModel("ManualPage|手动分页对象")
 public final class ManualPage<T> implements Serializable {
     @ApiModelProperty("页码")
     private int pageNum;

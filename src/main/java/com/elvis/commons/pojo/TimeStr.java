@@ -15,7 +15,7 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@ApiModel(value = "TimeStr|时间字符串对象")
+@ApiModel("TimeStr|时间字符串对象")
 public class TimeStr implements Serializable {
 
     @ApiModelProperty("开始时间字符串")
