@@ -46,7 +46,6 @@ public final class TreeNode implements Serializable {
         this.id = id;
         this.parentId = parentId;
         this.name = name;
-        this.type = type;
     }
 
     public TreeNode(String id, String parentId, String name, String type) {
