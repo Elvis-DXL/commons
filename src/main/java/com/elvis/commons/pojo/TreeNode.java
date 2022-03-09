@@ -39,8 +39,14 @@ public final class TreeNode implements Serializable {
     @ApiModelProperty("节点本身对象")
     private Object self;
 
-
     public TreeNode() {
+    }
+
+    public TreeNode(String id, String parentId, String name) {
+        this.id = id;
+        this.parentId = parentId;
+        this.name = name;
+        this.type = type;
     }
 
     public TreeNode(String id, String parentId, String name, String type) {
@@ -48,6 +54,13 @@ public final class TreeNode implements Serializable {
         this.parentId = parentId;
         this.name = name;
         this.type = type;
+    }
+
+    public TreeNode(String id, String parentId, String name, Object self) {
+        this.id = id;
+        this.parentId = parentId;
+        this.name = name;
+        this.self = self;
     }
 
     public TreeNode(String id, String parentId, String name, String type, Object self) {
