@@ -34,6 +34,7 @@ public enum DPEnum {
     c_HH_mm_ss("HH时mm分ss秒"),
     c_HH_mm("HH时mm分"),
     c_yyyy_MM_dd_EE("yyyy年MM月dd日 EE"),
+    c_EE("EE"),
     x_yyyy_MM_dd_HH_mm_ss_SSS("yyyy/MM/dd HH:mm:ss.SSS"),
     x_yyyy_MM_dd_HH_mm_ss("yyyy/MM/dd HH:mm:ss"),
     x_yyyy_MM_dd_HH_mm("yyyy/MM/dd HH:mm"),

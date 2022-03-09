@@ -16,8 +16,6 @@ import java.util.List;
  */
 public final class DateUtil {
 
-    private final static String[] DAY_NAMES = {"星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"};
-
     private DateUtil() {
     }
 
@@ -183,7 +181,7 @@ public final class DateUtil {
         if (null == date) {
             date = new Date();
         }
-        return DAY_NAMES[dateToCalendar(date).get(Calendar.DAY_OF_WEEK) - 1];
+        return formatDate(date, DPEnum.c_EE);
     }
 
     /**
