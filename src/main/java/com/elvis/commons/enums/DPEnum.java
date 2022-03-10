@@ -41,6 +41,8 @@ public enum DPEnum {
     x_yyyy_MM_dd_HH("yyyy/MM/dd HH"),
     x_yyyy_MM_dd("yyyy/MM/dd"),
     x_yyyy_MM("yyyy/MM"),
+    xh_yyyy_MM_dd("yyyy_MM_dd"),
+    xh_yyyy_MM("yyyy_MM"),
     yyyy("yyyy"),
     MM("MM"),
     dd("dd"),

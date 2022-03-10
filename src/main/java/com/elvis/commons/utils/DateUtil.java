@@ -529,22 +529,7 @@ public final class DateUtil {
      * @return 字符串集合
      */
     public static List<String> yearMonthStr(Date startTime, Date endTime, DPEnum dpEnum) {
-        if (null == startTime || null == endTime) {
-            return new ArrayList<>();
-        }
-        if (startTime.after(endTime)) {
-            Date temp = startTime;
-            startTime = endTime;
-            endTime = temp;
-        }
-        Calendar min = dateToCalendar(dateCurrMonthStartTime(startTime));
-        Calendar max = dateToCalendar(dateCurrMonthEndTime(endTime));
-        ArrayList<String> result = new ArrayList<>();
-        while (min.getTime().getTime() <= max.getTime().getTime()) {
-            result.add(formatDate(min.getTime(), dpEnum));
-            min.add(Calendar.MONTH, 1);
-        }
-        return result;
+        return yearMonthStr(startTime, endTime, dpEnum.pattern());
     }
 
     /**
@@ -564,8 +549,8 @@ public final class DateUtil {
             startTime = endTime;
             endTime = temp;
         }
-        Calendar max = dateToCalendar(dateCurrMonthEndTime(endTime));
         Calendar min = dateToCalendar(dateCurrMonthStartTime(startTime));
+        Calendar max = dateToCalendar(dateCurrMonthEndTime(endTime));
         ArrayList<String> result = new ArrayList<>();
         while (min.getTime().getTime() <= max.getTime().getTime()) {
             result.add(formatDate(min.getTime(), pattern));
