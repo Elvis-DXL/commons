@@ -47,6 +47,14 @@ public final class AnnoUtil {
         }
     }
 
+    public static <T> void mergeListMerge(T obj) {
+        mergeListMerge(obj, null);
+    }
+
+    public static <T> void splitListMerge(T obj) {
+        splitListMerge(obj, null);
+    }
+
     public static <T> void mergeListMerge(T obj, String reducePrefix) {
         if (null == obj) {
             return;
