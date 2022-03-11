@@ -1,7 +1,7 @@
 package com.elvis.commons.anno;
 
 
-import com.elvis.commons.enums.JTTypeEnum;
+import com.elvis.commons.enums.JTTEnum;
 
 import java.lang.annotation.*;
 
@@ -17,7 +17,7 @@ public @interface JsonTrans {
 
     String srcField() default "";
 
-    JTTypeEnum srcType() default JTTypeEnum.OBJ;
+    JTTEnum srcType() default JTTEnum.OBJ;
 
     Class objClass();
 }

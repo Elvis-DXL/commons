@@ -3,7 +3,7 @@ package com.elvis.commons.utils;
 import com.alibaba.fastjson.JSONObject;
 import com.elvis.commons.anno.JsonTrans;
 import com.elvis.commons.anno.ListMerge;
-import com.elvis.commons.enums.JTTypeEnum;
+import com.elvis.commons.enums.JTTEnum;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -226,11 +226,11 @@ public final class AnnoUtil {
             if (null == srtField) {
                 continue;
             }
-            JTTypeEnum jtTypeEnum = jsonTrans.srcType();
+            JTTEnum jttEnum = jsonTrans.srcType();
             Class objClass = jsonTrans.objClass();
             srtField.setAccessible(true);
             try {
-                srtField.set(obj, jtTypeEnum.equals(JTTypeEnum.OBJ) ?
+                srtField.set(obj, jttEnum.equals(JTTEnum.OBJ) ?
                         JSONObject.parseObject(fieldValue, objClass)
                         : JSONObject.parseArray(fieldValue, objClass));
             } catch (IllegalAccessException e) {
