@@ -20,6 +20,7 @@ public final class ExcelUtil {
                                    HttpServletRequest request, HttpServletResponse response) {
         fileName = fileName + ".xls";
         fileName = DownloadUtil.encodeDownloadFileName(fileName, request);
+        response.setCharacterEncoding("UTF-8");
         response.setContentType("application/vnd.ms-excel");
         response.setHeader("Content-disposition", "attachment;filename=" + fileName);
         OutputStream out = null;
@@ -33,5 +34,6 @@ public final class ExcelUtil {
             IOUtil.closeStream(out, wb);
         }
     }
+
 
 }
