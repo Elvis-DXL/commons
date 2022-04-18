@@ -10,6 +10,7 @@ public enum SymbolEnum {
     FH(";"),
     XHX("_"),
     YWD("."),
+
     //定义结束
     ;
 
