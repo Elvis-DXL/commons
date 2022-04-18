@@ -8,7 +8,9 @@ public enum SymbolEnum {
     //枚举定义
     DH(","),
     FH(";"),
-    XHX("_"),;
+    XHX("_"),
+    //定义结束    
+    ;
 
     private final String symbol;
 

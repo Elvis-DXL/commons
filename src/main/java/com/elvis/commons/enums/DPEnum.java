@@ -49,7 +49,9 @@ public enum DPEnum {
     HH("HH"),
     mm("mm"),
     ss("ss"),
-    SSS("SSS"),;
+    SSS("SSS"),
+    //定义结束
+    ;
 
     private final String pattern;
 

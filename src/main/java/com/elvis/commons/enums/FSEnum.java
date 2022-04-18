@@ -6,7 +6,11 @@ package com.elvis.commons.enums;
  */
 public enum FSEnum {
     //枚举定义
-    XLS(".xls"),;
+    XLS(".xls"),
+    XLSX(".xlsx"),
+
+    //定义结束
+    ;
 
     private final String suffix;
 
@@ -16,5 +20,12 @@ public enum FSEnum {
 
     public String suffix() {
         return suffix;
+    }
+
+    public Boolean valid(String suffixStr) {
+        if (null == suffixStr || suffixStr.trim().length() == 0) {
+            return Boolean.FALSE;
+        }
+        return this.suffix.equals(suffix.trim().toLowerCase());
     }
 }

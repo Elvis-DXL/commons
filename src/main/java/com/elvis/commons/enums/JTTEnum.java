@@ -6,5 +6,7 @@ package com.elvis.commons.enums;
  */
 public enum JTTEnum {
     //枚举定义
-    OBJ, LIST,;
+    OBJ, LIST,
+    //定义结束
+    ;
 }
