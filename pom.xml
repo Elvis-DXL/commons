@@ -6,7 +6,7 @@
 
     <groupId>com.github.elvis</groupId>
     <artifactId>commons</artifactId>
-    <version>1.2-RELEASE</version>
+    <version>1.0.0-RELEASE</version>
 
     <!--以下待随时更新-->
     <dependencies>
