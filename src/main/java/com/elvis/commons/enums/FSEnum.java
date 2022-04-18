@@ -18,15 +18,21 @@ public enum FSEnum {
         this.suffix = suffix;
     }
 
-    public String suffix() {
-        return suffix;
-    }
-
-    public Boolean valid(String suffixStr) {
-        if (null == suffixStr || suffixStr.trim().length() == 0) {
+    public Boolean validByFS(String fileSuffix) {
+        if (null == fileSuffix || fileSuffix.trim().length() == 0) {
             return Boolean.FALSE;
         }
-        return this.suffix.equals(suffix.trim().toLowerCase());
+        return this.suffix.equals(fileSuffix.trim().toLowerCase());
+    }
+
+    public Boolean validByFN(String fileName) {
+        if (null == fileName || fileName.trim().length() == 0) {
+            return Boolean.FALSE;
+        }
+        if (!fileName.contains(SymbolEnum.YWD.symbol())) {
+            return Boolean.FALSE;
+        }
+        return this.validByFS(fileName.substring(fileName.lastIndexOf(SymbolEnum.YWD.symbol())));
     }
 
 }
