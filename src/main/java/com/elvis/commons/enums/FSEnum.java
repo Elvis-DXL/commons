@@ -28,4 +28,5 @@ public enum FSEnum {
         }
         return this.suffix.equals(suffix.trim().toLowerCase());
     }
+
 }
