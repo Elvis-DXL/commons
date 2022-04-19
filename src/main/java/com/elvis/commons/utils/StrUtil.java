@@ -48,7 +48,7 @@ public final class StrUtil {
             return null;
         }
         StringTokenizer st = new StringTokenizer(str, separatorChars);
-        List<Long> result = new ArrayList<Long>();
+        List<Long> result = new ArrayList<>();
         while (st.hasMoreTokens()) {
             String temp = st.nextToken();
             result.add(Long.valueOf(temp));
@@ -68,7 +68,7 @@ public final class StrUtil {
             return null;
         }
         StringTokenizer st = new StringTokenizer(str, separatorChars);
-        List<Integer> result = new ArrayList<Integer>();
+        List<Integer> result = new ArrayList<>();
         while (st.hasMoreTokens()) {
             String temp = st.nextToken();
             result.add(Integer.valueOf(temp));
@@ -88,7 +88,7 @@ public final class StrUtil {
             return null;
         }
         StringTokenizer st = new StringTokenizer(str, separatorChars);
-        List<String> result = new ArrayList<String>();
+        List<String> result = new ArrayList<>();
         while (st.hasMoreTokens()) {
             result.add(st.nextToken());
         }
