@@ -10,6 +10,11 @@
 
     <!--以下待随时更新-->
     <dependencies>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.41</version>
+        </dependency>
 
     </dependencies>
 
