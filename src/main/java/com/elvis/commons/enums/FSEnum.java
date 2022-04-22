@@ -10,6 +10,12 @@ public enum FSEnum {
     //枚举定义
     XLS(".xls"),
     XLSX(".xlsx"),
+    DOC(".doc"),
+    DOCX(".docx"),
+    XML(".xml"),
+    JPG(".jpg"),
+    JPEG(".jpeg"),
+    TXT(".txt"),
 
     //定义结束
     ;
