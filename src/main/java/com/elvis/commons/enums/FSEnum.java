@@ -49,4 +49,8 @@ public enum FSEnum {
         return Boolean.FALSE;
     }
 
+    public static Boolean isExecl(String fileName) {
+        return isAnyOne(fileName, XLS, XLSX);
+    }
+
 }
