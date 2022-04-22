@@ -20,6 +20,10 @@ public enum FSEnum {
         this.suffix = suffix;
     }
 
+    public String suffix() {
+        return suffix;
+    }
+
     public Boolean validByFS(String fileSuffix) {
         if (null == fileSuffix || fileSuffix.trim().length() == 0) {
             return Boolean.FALSE;
