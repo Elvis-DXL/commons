@@ -37,4 +37,16 @@ public enum FSEnum {
         return this.validByFS(fileName.substring(fileName.lastIndexOf(SymbolEnum.YWD.symbol())));
     }
 
+    public static Boolean isAnyOne(String fileName, FSEnum... fsEnums) {
+        if (null == fsEnums || fsEnums.length == 0) {
+            return Boolean.FALSE;
+        }
+        for (FSEnum fsEnum : fsEnums) {
+            if (fsEnum.validByFN(fileName)) {
+                return Boolean.TRUE;
+            }
+        }
+        return Boolean.FALSE;
+    }
+
 }
