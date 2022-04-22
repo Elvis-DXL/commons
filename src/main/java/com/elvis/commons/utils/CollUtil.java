@@ -1,6 +1,7 @@
 package com.elvis.commons.utils;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -13,6 +14,14 @@ import java.util.stream.Collectors;
 public final class CollUtil {
 
     private CollUtil() {
+    }
+
+    public static boolean isEmpty(Collection<?> coll) {
+        return coll == null || coll.isEmpty();
+    }
+
+    public static boolean isNotEmpty(Collection<?> coll) {
+        return !isEmpty(coll);
     }
 
     public static <T> List<T> mergeInto(List<T> srcList, List<T> aimList) {
