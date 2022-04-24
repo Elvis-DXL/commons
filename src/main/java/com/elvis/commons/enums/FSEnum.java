@@ -1,5 +1,7 @@
 package com.elvis.commons.enums;
 
+import com.elvis.commons.utils.StrUtil;
+
 /**
  * 文件后缀名定义枚举
  *
@@ -31,17 +33,14 @@ public enum FSEnum {
     }
 
     private Boolean validByFS(String fileSuffix) {
-        if (null == fileSuffix || fileSuffix.trim().length() == 0) {
+        if (StrUtil.isEmpty(fileSuffix) || StrUtil.isEmpty(fileSuffix.trim())) {
             return Boolean.FALSE;
         }
         return this.suffix.equals(fileSuffix.trim().toLowerCase());
     }
 
     public Boolean validByFN(String fileName) {
-        if (null == fileName || fileName.trim().length() == 0) {
-            return Boolean.FALSE;
-        }
-        if (!fileName.contains(SymEnum.YWD.sym())) {
+        if (StrUtil.isEmpty(fileName) || StrUtil.isEmpty(fileName.trim()) || SymEnum.YWD.notIncluded(fileName)) {
             return Boolean.FALSE;
         }
         return this.validByFS(fileName.substring(fileName.lastIndexOf(SymEnum.YWD.sym())));

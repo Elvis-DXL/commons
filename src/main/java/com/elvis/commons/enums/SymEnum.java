@@ -34,9 +34,10 @@ public enum SymEnum {
     }
 
     public Boolean included(String aimStr) {
-        if (StrUtil.isEmpty(aimStr) || StrUtil.isEmpty(aimStr.trim())) {
-            return Boolean.FALSE;
-        }
-        return aimStr.trim().contains(this.sym);
+        return StrUtil.isNotEmpty(aimStr) && StrUtil.isNotEmpty(aimStr.trim()) && aimStr.trim().contains(this.sym);
+    }
+
+    public Boolean notIncluded(String aimStr) {
+        return !this.included(aimStr);
     }
 }
