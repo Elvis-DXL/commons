@@ -30,7 +30,7 @@ public enum FSEnum {
         return suffix;
     }
 
-    public Boolean validByFS(String fileSuffix) {
+    private Boolean validByFS(String fileSuffix) {
         if (null == fileSuffix || fileSuffix.trim().length() == 0) {
             return Boolean.FALSE;
         }
