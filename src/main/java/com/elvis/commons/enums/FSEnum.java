@@ -41,10 +41,10 @@ public enum FSEnum {
         if (null == fileName || fileName.trim().length() == 0) {
             return Boolean.FALSE;
         }
-        if (!fileName.contains(SymbolEnum.YWD.symbol())) {
+        if (!fileName.contains(SymEnum.YWD.sym())) {
             return Boolean.FALSE;
         }
-        return this.validByFS(fileName.substring(fileName.lastIndexOf(SymbolEnum.YWD.symbol())));
+        return this.validByFS(fileName.substring(fileName.lastIndexOf(SymEnum.YWD.sym())));
     }
 
     public static Boolean isAnyOne(String fileName, FSEnum... fsEnums) {

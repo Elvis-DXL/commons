@@ -6,7 +6,7 @@ package com.elvis.commons.enums;
  * @author : Elvis
  * @since : 2022/3/11 17:47
  */
-public enum SymbolEnum {
+public enum SymEnum {
     //枚举定义
     DH(","),
     FH(";"),
@@ -16,13 +16,13 @@ public enum SymbolEnum {
     //定义结束
     ;
 
-    private final String symbol;
+    private final String sym;
 
-    SymbolEnum(String symbol) {
-        this.symbol = symbol;
+    SymEnum(String sym) {
+        this.sym = sym;
     }
 
-    public String symbol() {
-        return symbol;
+    public String sym() {
+        return sym;
     }
 }
