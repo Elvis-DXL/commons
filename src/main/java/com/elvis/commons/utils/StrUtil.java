@@ -36,6 +36,14 @@ public final class StrUtil {
         return !isEmpty(cs);
     }
 
+    public static boolean isEmptyIgnoreTrim(String str) {
+        return isEmpty(str) || isEmpty(str.trim());
+    }
+
+    public static boolean isNotEmptyIgnoreTrim(String str) {
+        return !isEmptyIgnoreTrim(str);
+    }
+
     /**
      * 分割字符串并转换成Long
      *

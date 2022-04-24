@@ -33,17 +33,12 @@ public enum FSEnum {
     }
 
     private Boolean validByFS(String fileSuffix) {
-        if (StrUtil.isEmpty(fileSuffix) || StrUtil.isEmpty(fileSuffix.trim())) {
-            return Boolean.FALSE;
-        }
-        return this.suffix.equals(fileSuffix.trim().toLowerCase());
+        return StrUtil.isNotEmptyIgnoreTrim(fileSuffix) && this.suffix.equals(fileSuffix.trim().toLowerCase());
     }
 
     public Boolean validByFN(String fileName) {
-        if (StrUtil.isEmpty(fileName) || StrUtil.isEmpty(fileName.trim()) || SymEnum.YWD.notIncluded(fileName)) {
-            return Boolean.FALSE;
-        }
-        return this.validByFS(fileName.substring(fileName.lastIndexOf(SymEnum.YWD.sym())));
+        return StrUtil.isNotEmptyIgnoreTrim(fileName) && SymEnum.YWD.included(fileName)
+                && this.validByFS(fileName.substring(fileName.lastIndexOf(SymEnum.YWD.sym())));
     }
 
     public static Boolean isAnyOne(String fileName, FSEnum... fsEnums) {
