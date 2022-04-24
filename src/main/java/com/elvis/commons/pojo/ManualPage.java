@@ -1,5 +1,6 @@
 package com.elvis.commons.pojo;
 
+import com.elvis.commons.utils.CollUtil;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -33,7 +34,7 @@ public final class ManualPage<T> implements Serializable {
 
     public static <T> ManualPage<T> manualPage(List<T> data, int pageNum, int pageSize) {
         ManualPage<T> result = new ManualPage<>();
-        if (null == data || data.size() == 0) {
+        if (CollUtil.isEmpty(data)) {
             result.setPageNum(1);
             result.setPageSize(pageSize);
             result.setTotalNum(0);

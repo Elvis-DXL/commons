@@ -20,7 +20,7 @@ public final class NumberUtil {
      * @return 最大值
      */
     public static Long max(Long... numbers) {
-        if (numbers.length == 0) {
+        if (null == numbers || numbers.length == 0) {
             return null;
         }
         Long max = null;
@@ -50,7 +50,7 @@ public final class NumberUtil {
      * @return 最大值
      */
     public static Double max(Double... numbers) {
-        if (numbers.length == 0) {
+        if (null == numbers || numbers.length == 0) {
             return null;
         }
         Double max = null;
@@ -80,7 +80,7 @@ public final class NumberUtil {
      * @return 最大值
      */
     public static Integer max(Integer... numbers) {
-        if (numbers.length == 0) {
+        if (null == numbers || numbers.length == 0) {
             return null;
         }
         Integer max = null;
@@ -110,7 +110,7 @@ public final class NumberUtil {
      * @return 最大值
      */
     public static Short max(Short... numbers) {
-        if (numbers.length == 0) {
+        if (null == numbers || numbers.length == 0) {
             return null;
         }
         Short max = null;
@@ -141,7 +141,7 @@ public final class NumberUtil {
      * @return 最小值
      */
     public static Long min(Long... numbers) {
-        if (numbers.length == 0) {
+        if (null == numbers || numbers.length == 0) {
             return null;
         }
         Long min = null;
@@ -171,7 +171,7 @@ public final class NumberUtil {
      * @return 最小值
      */
     public static Double min(Double... numbers) {
-        if (numbers.length == 0) {
+        if (null == numbers || numbers.length == 0) {
             return null;
         }
         Double min = null;
@@ -201,7 +201,7 @@ public final class NumberUtil {
      * @return 最小值
      */
     public static Integer min(Integer... numbers) {
-        if (numbers.length == 0) {
+        if (null == numbers || numbers.length == 0) {
             return null;
         }
         Integer min = null;
@@ -231,7 +231,7 @@ public final class NumberUtil {
      * @return 最小值
      */
     public static Short min(Short... numbers) {
-        if (numbers.length == 0) {
+        if (null == numbers || numbers.length == 0) {
             return null;
         }
         Short min = null;

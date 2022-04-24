@@ -39,7 +39,7 @@ public final class BeanUtil {
     }
 
     public static <T> List<T> mapToBean(List<Map<String, Object>> mapList, Class<T> clazz) {
-        if (null == mapList || mapList.size() == 0) {
+        if (CollUtil.isEmpty(mapList)) {
             return null;
         }
         List<T> result = new ArrayList<>();
@@ -56,7 +56,7 @@ public final class BeanUtil {
 
     public static <T> T mapToBean(Map<String, Object> map, Class<T> clazz) {
         Set keySet = map.keySet();
-        if (null == keySet || keySet.size() == 0) {
+        if (CollUtil.isEmpty(keySet)) {
             return null;
         }
         T data = null;

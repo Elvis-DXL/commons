@@ -28,7 +28,7 @@ public final class CollUtil {
         if (null == srcList) {
             srcList = new ArrayList<>();
         }
-        if (null == aimList || aimList.size() == 0) {
+        if (isEmpty(aimList)) {
             return srcList;
         }
         for (T item : aimList) {

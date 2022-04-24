@@ -30,7 +30,7 @@ public enum SymEnum {
     }
 
     public String sym() {
-        return sym;
+        return this.sym;
     }
 
     public Boolean included(String aimStr) {

@@ -22,6 +22,9 @@ public final class IOUtil {
      * @param streams 流
      */
     public static void closeStream(Closeable... streams) {
+        if (null == streams || streams.length == 0) {
+            return;
+        }
         for (Closeable item : streams) {
             if (null == item) {
                 continue;

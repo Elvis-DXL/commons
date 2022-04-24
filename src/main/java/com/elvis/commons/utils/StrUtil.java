@@ -111,7 +111,7 @@ public final class StrUtil {
      * @return 字符串结果
      */
     public static String joinStr(Collection<String> strCol, String separatorChars) {
-        if (null == strCol || strCol.size() == 0) {
+        if (CollUtil.isEmpty(strCol)) {
             return null;
         }
         StringBuilder sb = new StringBuilder();

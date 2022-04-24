@@ -21,7 +21,7 @@ public final class TreeUtil {
 
     public static List<TreeNode> formatTree(List<TreeNode> data) {
         List<TreeNode> result = new ArrayList<>(1000);
-        if (data != null && data.size() != 0) {
+        if (CollUtil.isNotEmpty(data)) {
             Map<String, TreeNode> tmpMap = new HashMap<>(1000);
             for (TreeNode node : data) {
                 tmpMap.put(node.getId(), node);

@@ -30,7 +30,7 @@ public final class AnnoUtil {
     }
 
     public static <T> void mergeListMerge(List<T> objList, String reducePrefix) {
-        if (null == objList || objList.size() == 0) {
+        if (CollUtil.isEmpty(objList)) {
             return;
         }
         Iterator<T> iterator = objList.iterator();
@@ -40,7 +40,7 @@ public final class AnnoUtil {
     }
 
     public static <T> void splitListMerge(List<T> objList, String addPrefix) {
-        if (null == objList || objList.size() == 0) {
+        if (CollUtil.isEmpty(objList)) {
             return;
         }
         Iterator<T> iterator = objList.iterator();
@@ -89,7 +89,7 @@ public final class AnnoUtil {
                 e.printStackTrace();
             }
             listField.setAccessible(false);
-            if (null == list || list.size() == 0) {
+            if (CollUtil.isEmpty(list)) {
                 continue;
             }
             String fieldVal = "";
@@ -182,7 +182,7 @@ public final class AnnoUtil {
     }
 
     public static <T> void parsingJsonTrans(List<T> objList) {
-        if (null == objList || objList.size() == 0) {
+        if (CollUtil.isEmpty(objList)) {
             return;
         }
         Iterator<T> iterator = objList.iterator();
@@ -192,7 +192,7 @@ public final class AnnoUtil {
     }
 
     public static <T> void transJsonTrans(List<T> objList) {
-        if (null == objList || objList.size() == 0) {
+        if (CollUtil.isEmpty(objList)) {
             return;
         }
         Iterator<T> iterator = objList.iterator();
