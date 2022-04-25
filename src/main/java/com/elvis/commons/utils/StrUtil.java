@@ -122,4 +122,22 @@ public final class StrUtil {
         String result = sb.toString();
         return result.substring(0, result.length() - separatorChars.length());
     }
+
+    /**
+     * 数字按照要求长度前端补零
+     *
+     * @param num    数字
+     * @param length 长度
+     * @return 结果字符串
+     */
+    public static String intToStrByLength(int num, Integer length) {
+        if (null == length) {
+            return num + "";
+        }
+        String str = num + "";
+        while (str.length() < length) {
+            str = "0".concat(str);
+        }
+        return str;
+    }
 }
