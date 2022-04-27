@@ -65,16 +65,16 @@ public enum FSEnum {
         return Boolean.FALSE;
     }
 
+    public static Boolean isXml(String fileName) {
+        return XML.validByFN(fileName);
+    }
+
     public static Boolean isExecl(String fileName) {
         return isAnyOne(fileName, XLS, XLSX);
     }
 
     public static Boolean isWord(String fileName) {
         return isAnyOne(fileName, DOC, DOCX);
-    }
-
-    public static Boolean isXml(String fileName) {
-        return XML.validByFN(fileName);
     }
 
     public static Boolean isImage(String fileName) {
