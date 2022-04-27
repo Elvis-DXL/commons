@@ -2,6 +2,7 @@ package com.elvis.commons.utils;
 
 import java.lang.reflect.Field;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Bean工具集
@@ -81,5 +82,42 @@ public final class BeanUtil {
             field.setAccessible(false);
         }
         return data;
+    }
+
+    public static void copyField(Object srcObj, Object aimObj, String... ignoreField) {
+        List<String> ignore = new ArrayList<>();
+        if (null != ignoreField && ignoreField.length > 0) {
+            ignore.addAll(Arrays.asList(ignoreField));
+        }
+        List<Field> srcFields = ClassUtil.allField(srcObj.getClass());
+        List<Field> aimFields = ClassUtil.allField(aimObj.getClass());
+        Map<String, Field> srcMap = srcFields.stream().collect(Collectors.toMap(Field::getName, it -> it));
+        for (Field aimField : aimFields) {
+            if (ignore.contains(aimField.getName())) {
+                continue;
+            }
+            Field srcField = srcMap.get(aimField.getName());
+            if (null == srcField) {
+                continue;
+            }
+            srcField.setAccessible(true);
+            Object val = null;
+            try {
+                val = srcField.get(srcObj);
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+            srcField.setAccessible(false);
+            if (null == val) {
+                continue;
+            }
+            aimField.setAccessible(true);
+            try {
+                aimField.set(aimObj, val);
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+            aimField.setAccessible(false);
+        }
     }
 }
