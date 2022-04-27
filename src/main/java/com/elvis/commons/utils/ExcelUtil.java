@@ -1,5 +1,6 @@
 package com.elvis.commons.utils;
 
+import com.elvis.commons.enums.FSEnum;
 import org.apache.poi.ss.usermodel.Workbook;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,7 +21,7 @@ public final class ExcelUtil {
 
     public static void exportExcel(Workbook wb, String fileName,
                                    HttpServletRequest request, HttpServletResponse response) {
-        fileName = fileName + ".xls";
+        fileName = fileName + FSEnum.XLS.suffix();
         fileName = DownloadUtil.encodeDownloadFileName(fileName, request);
         response.setCharacterEncoding("UTF-8");
         response.setContentType("application/vnd.ms-excel");
