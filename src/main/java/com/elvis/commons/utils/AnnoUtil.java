@@ -9,6 +9,8 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * 注解工具集
@@ -62,9 +64,10 @@ public final class AnnoUtil {
             return;
         }
         Class<?> clazz = obj.getClass();
-        Field[] fields = clazz.getDeclaredFields();
+        List<Field> fields = ClassUtil.allField(clazz);
+        Map<String, Field> fieldMap = fields.stream().collect(Collectors.toMap(Field::getName, it -> it));
         for (Field field : fields) {
-            ListMerge listMerge = field.getDeclaredAnnotation(ListMerge.class);
+            ListMerge listMerge = field.getAnnotation(ListMerge.class);
             if (null == listMerge) {
                 continue;
             }
@@ -72,12 +75,7 @@ public final class AnnoUtil {
             if (StrUtil.isEmpty(listFieldStr)) {
                 continue;
             }
-            Field listField = null;
-            try {
-                listField = clazz.getDeclaredField(listFieldStr);
-            } catch (NoSuchFieldException e) {
-                e.printStackTrace();
-            }
+            Field listField = fieldMap.get(listFieldStr);
             if (null == listField) {
                 continue;
             }
@@ -127,9 +125,10 @@ public final class AnnoUtil {
             return;
         }
         Class<?> clazz = obj.getClass();
-        Field[] fields = clazz.getDeclaredFields();
+        List<Field> fields = ClassUtil.allField(clazz);
+        Map<String, Field> fieldMap = fields.stream().collect(Collectors.toMap(Field::getName, it -> it));
         for (Field field : fields) {
-            ListMerge listMerge = field.getDeclaredAnnotation(ListMerge.class);
+            ListMerge listMerge = field.getAnnotation(ListMerge.class);
             if (null == listMerge) {
                 continue;
             }
@@ -162,12 +161,7 @@ public final class AnnoUtil {
             if (StrUtil.isEmpty(listFieldStr)) {
                 continue;
             }
-            Field listField = null;
-            try {
-                listField = clazz.getDeclaredField(listFieldStr);
-            } catch (NoSuchFieldException e) {
-                e.printStackTrace();
-            }
+            Field listField = fieldMap.get(listFieldStr);
             if (null == listField) {
                 continue;
             }
@@ -206,9 +200,10 @@ public final class AnnoUtil {
             return;
         }
         Class<?> clazz = obj.getClass();
-        Field[] fields = clazz.getDeclaredFields();
+        List<Field> fields = ClassUtil.allField(clazz);
+        Map<String, Field> fieldMap = fields.stream().collect(Collectors.toMap(Field::getName, it -> it));
         for (Field field : fields) {
-            JsonTrans jsonTrans = field.getDeclaredAnnotation(JsonTrans.class);
+            JsonTrans jsonTrans = field.getAnnotation(JsonTrans.class);
             if (null == jsonTrans) {
                 continue;
             }
@@ -227,12 +222,7 @@ public final class AnnoUtil {
             if (StrUtil.isEmpty(srcFieldStr)) {
                 continue;
             }
-            Field srtField = null;
-            try {
-                srtField = clazz.getDeclaredField(srcFieldStr);
-            } catch (NoSuchFieldException e) {
-                e.printStackTrace();
-            }
+            Field srtField = fieldMap.get(srcFieldStr);
             if (null == srtField) {
                 continue;
             }
@@ -255,9 +245,10 @@ public final class AnnoUtil {
             return;
         }
         Class<?> clazz = obj.getClass();
-        Field[] fields = clazz.getDeclaredFields();
+        List<Field> fields = ClassUtil.allField(clazz);
+        Map<String, Field> fieldMap = fields.stream().collect(Collectors.toMap(Field::getName, it -> it));
         for (Field field : fields) {
-            JsonTrans jsonTrans = field.getDeclaredAnnotation(JsonTrans.class);
+            JsonTrans jsonTrans = field.getAnnotation(JsonTrans.class);
             if (null == jsonTrans) {
                 continue;
             }
@@ -265,12 +256,7 @@ public final class AnnoUtil {
             if (StrUtil.isEmpty(srcFieldStr)) {
                 continue;
             }
-            Field srcField = null;
-            try {
-                srcField = clazz.getDeclaredField(srcFieldStr);
-            } catch (NoSuchFieldException e) {
-                e.printStackTrace();
-            }
+            Field srcField = fieldMap.get(srcFieldStr);
             if (null == srcField) {
                 continue;
             }
