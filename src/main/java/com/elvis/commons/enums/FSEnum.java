@@ -18,6 +18,18 @@ public enum FSEnum {
     JPG(".jpg"),
     JPEG(".jpeg"),
     TXT(".txt"),
+    PNG(".png"),
+    BMP(".bmp"),
+    GIF(".gif"),
+    TIFF(".tiff"),
+    PSD(".psd"),
+    SVG(".svg"),
+    PCX(".pcx"),
+    DXF(".dxf"),
+    WMF(".wmf"),
+    EMF(".emf"),
+    EPS(".eps"),
+    TGA(".tga"),
 
     //定义结束
     ;
@@ -57,4 +69,15 @@ public enum FSEnum {
         return isAnyOne(fileName, XLS, XLSX);
     }
 
+    public static Boolean isWord(String fileName) {
+        return isAnyOne(fileName, DOC, DOCX);
+    }
+
+    public static Boolean isXml(String fileName) {
+        return XML.validByFN(fileName);
+    }
+
+    public static Boolean isImage(String fileName) {
+        return isAnyOne(fileName, JPG, JPEG, PNG, BMP, GIF, TIFF, PSD, SVG, PCX, DXF, WMF, EMF, EPS, TGA);
+    }
 }
