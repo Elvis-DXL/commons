@@ -23,7 +23,7 @@ public final class BeanUtil {
     public static Boolean allFieldNull(Object obj) {
         try {
             Class<?> clazz = obj.getClass();
-            Field[] fields = clazz.getDeclaredFields();
+            List<Field> fields = ClassUtil.allField(clazz);
             for (Field field : fields) {
                 field.setAccessible(true);
                 Object value = field.get(obj);
@@ -65,7 +65,7 @@ public final class BeanUtil {
         } catch (InstantiationException | IllegalAccessException e) {
             e.printStackTrace();
         }
-        Field[] fields = clazz.getDeclaredFields();
+        List<Field> fields = ClassUtil.allField(clazz);
         for (Field field : fields) {
             String fieldName = field.getName();
             Object value = map.get(fieldName);
