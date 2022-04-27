@@ -100,8 +100,8 @@ public final class BeanUtil {
             if (null == srcField) {
                 continue;
             }
-            srcField.setAccessible(true);
             Object val = null;
+            srcField.setAccessible(true);
             try {
                 val = srcField.get(srcObj);
             } catch (IllegalAccessException e) {
