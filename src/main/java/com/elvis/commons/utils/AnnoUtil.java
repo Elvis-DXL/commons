@@ -64,7 +64,7 @@ public final class AnnoUtil {
             return;
         }
         Class<?> clazz = obj.getClass();
-        List<Field> fields = ClassUtil.allField(clazz);
+        List<Field> fields = ClassUtil.allFields(clazz);
         Map<String, Field> fieldMap = fields.stream().collect(Collectors.toMap(Field::getName, it -> it));
         for (Field field : fields) {
             ListMerge listMerge = field.getAnnotation(ListMerge.class);
@@ -125,7 +125,7 @@ public final class AnnoUtil {
             return;
         }
         Class<?> clazz = obj.getClass();
-        List<Field> fields = ClassUtil.allField(clazz);
+        List<Field> fields = ClassUtil.allFields(clazz);
         Map<String, Field> fieldMap = fields.stream().collect(Collectors.toMap(Field::getName, it -> it));
         for (Field field : fields) {
             ListMerge listMerge = field.getAnnotation(ListMerge.class);
@@ -200,7 +200,7 @@ public final class AnnoUtil {
             return;
         }
         Class<?> clazz = obj.getClass();
-        List<Field> fields = ClassUtil.allField(clazz);
+        List<Field> fields = ClassUtil.allFields(clazz);
         Map<String, Field> fieldMap = fields.stream().collect(Collectors.toMap(Field::getName, it -> it));
         for (Field field : fields) {
             JsonTrans jsonTrans = field.getAnnotation(JsonTrans.class);
@@ -245,7 +245,7 @@ public final class AnnoUtil {
             return;
         }
         Class<?> clazz = obj.getClass();
-        List<Field> fields = ClassUtil.allField(clazz);
+        List<Field> fields = ClassUtil.allFields(clazz);
         Map<String, Field> fieldMap = fields.stream().collect(Collectors.toMap(Field::getName, it -> it));
         for (Field field : fields) {
             JsonTrans jsonTrans = field.getAnnotation(JsonTrans.class);

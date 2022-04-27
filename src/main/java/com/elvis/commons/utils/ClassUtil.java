@@ -14,7 +14,7 @@ public final class ClassUtil {
     private ClassUtil() {
     }
 
-    public static List<Field> allField(Class clazz) {
+    public static List<Field> allFields(Class clazz) {
         List<Field> result = new ArrayList<>();
         do {
             Field[] fields = clazz.getDeclaredFields();

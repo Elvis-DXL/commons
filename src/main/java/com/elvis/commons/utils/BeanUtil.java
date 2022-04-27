@@ -24,7 +24,7 @@ public final class BeanUtil {
     public static Boolean allFieldNull(Object obj) {
         try {
             Class<?> clazz = obj.getClass();
-            List<Field> fields = ClassUtil.allField(clazz);
+            List<Field> fields = ClassUtil.allFields(clazz);
             for (Field field : fields) {
                 field.setAccessible(true);
                 Object value = field.get(obj);
@@ -66,7 +66,7 @@ public final class BeanUtil {
         } catch (InstantiationException | IllegalAccessException e) {
             e.printStackTrace();
         }
-        List<Field> fields = ClassUtil.allField(clazz);
+        List<Field> fields = ClassUtil.allFields(clazz);
         for (Field field : fields) {
             String fieldName = field.getName();
             Object value = map.get(fieldName);
@@ -89,8 +89,8 @@ public final class BeanUtil {
         if (null != ignoreField && ignoreField.length > 0) {
             ignore.addAll(Arrays.asList(ignoreField));
         }
-        List<Field> srcFields = ClassUtil.allField(srcObj.getClass());
-        List<Field> aimFields = ClassUtil.allField(aimObj.getClass());
+        List<Field> srcFields = ClassUtil.allFields(srcObj.getClass());
+        List<Field> aimFields = ClassUtil.allFields(aimObj.getClass());
         Map<String, Field> srcMap = srcFields.stream().collect(Collectors.toMap(Field::getName, it -> it));
         for (Field aimField : aimFields) {
             if (ignore.contains(aimField.getName())) {
