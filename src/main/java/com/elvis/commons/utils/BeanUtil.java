@@ -84,10 +84,10 @@ public final class BeanUtil {
         return data;
     }
 
-    public static void copyField(Object srcObj, Object aimObj, String... ignoreField) {
+    public static void copyFields(Object srcObj, Object aimObj, String... ignoreFields) {
         List<String> ignore = new ArrayList<>();
-        if (null != ignoreField && ignoreField.length > 0) {
-            ignore.addAll(Arrays.asList(ignoreField));
+        if (null != ignoreFields && ignoreFields.length > 0) {
+            ignore.addAll(Arrays.asList(ignoreFields));
         }
         List<Field> srcFields = ClassUtil.allFields(srcObj.getClass());
         List<Field> aimFields = ClassUtil.allFields(aimObj.getClass());
