@@ -1,9 +1,6 @@
 package com.elvis.commons.utils;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.StringTokenizer;
+import java.util.*;
 
 /**
  * 字符串工具集
@@ -121,6 +118,20 @@ public final class StrUtil {
         }
         String result = sb.toString();
         return result.substring(0, result.length() - separatorChars.length());
+    }
+
+    /**
+     * 使用指定的字符连接字符串数组
+     *
+     * @param strArr         字符源数组
+     * @param separatorChars 分割符
+     * @return 字符串结果
+     */
+    public static String joinStr(String[] strArr, String separatorChars) {
+        if (null == strArr || strArr.length <= 0) {
+            return null;
+        }
+        return joinStr(Arrays.asList(strArr), separatorChars);
     }
 
     /**
