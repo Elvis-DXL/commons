@@ -25,7 +25,6 @@ public final class CollUtil {
         return !isEmpty(coll);
     }
 
-
     /**
      * 使用指定的字符连接字符串集合
      *
