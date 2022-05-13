@@ -15,6 +15,22 @@ public final class BeanUtil {
     private BeanUtil() {
     }
 
+    public static <T> T newInstance(Class<T> clazz) {
+        if (null == clazz) {
+            throw new IllegalArgumentException("Class must not be null");
+        }
+        if (clazz.isInterface()) {
+            throw new IllegalArgumentException("Specified class is an interface");
+        }
+        T obj = null;
+        try {
+            obj = clazz.newInstance();
+        } catch (InstantiationException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        return obj;
+    }
+
     /**
      * 判断对象的所有自有属性是不是都是null
      *
@@ -60,12 +76,7 @@ public final class BeanUtil {
         if (CollUtil.isEmpty(keySet)) {
             return null;
         }
-        T data = null;
-        try {
-            data = clazz.newInstance();
-        } catch (InstantiationException | IllegalAccessException e) {
-            e.printStackTrace();
-        }
+        T data = newInstance(clazz);
         List<Field> fields = ClassUtil.allFields(clazz);
         for (Field field : fields) {
             String fieldName = field.getName();

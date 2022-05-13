@@ -59,6 +59,19 @@ public final class CollUtil {
         return joinStr(Arrays.asList(strArr), separatorChars);
     }
 
+    public static <T, K> List<T> classChange(List<K> srcList, Class<T> clazz) {
+        if (isEmpty(srcList)) {
+            return new ArrayList<>();
+        }
+        List<T> result = new ArrayList<>();
+        for (K item : srcList) {
+            T aim = BeanUtil.newInstance(clazz);
+            BeanUtil.copyFields(item, aim);
+            result.add(aim);
+        }
+        return result;
+    }
+
     public static <T> List<T> mergeInto(List<T> srcList, List<T> aimList) {
         if (null == srcList) {
             srcList = new ArrayList<>();
