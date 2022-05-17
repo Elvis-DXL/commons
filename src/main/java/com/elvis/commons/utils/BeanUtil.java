@@ -32,7 +32,7 @@ public final class BeanUtil {
     }
 
     /**
-     * 判断对象的所有自有属性是不是都是null
+     * 判断对象的所有属性是不是都是null
      *
      * @param obj 目标对象
      * @return 结果
