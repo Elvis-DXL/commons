@@ -41,6 +41,11 @@ public enum FSEnum {
     MKV(".mkv"),
     FLV(".flv"),
     RMVB(".rmvb"),
+    MP4(".mp4"),
+    RM(".rm"),
+    MPG(".mpg"),
+    MPEG(".mpeg"),
+    SWF(".swf"),
 
     //定义结束
     ;
@@ -93,6 +98,6 @@ public enum FSEnum {
     }
 
     public static Boolean isVideo(String fileName) {
-        return isAnyOne(fileName, AVI, MOV, ASF, WMV, NAVI, GP3, RA, RAM, MKV, FLV, RMVB);
+        return isAnyOne(fileName, AVI, MOV, ASF, WMV, NAVI, GP3, RA, RAM, MKV, FLV, RMVB, MP4, RM, MPG, MPEG, SWF);
     }
 }

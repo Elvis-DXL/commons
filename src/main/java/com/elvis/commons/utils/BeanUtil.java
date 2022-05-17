@@ -81,6 +81,9 @@ public final class BeanUtil {
         }
         T data = newInstance(clazz);
         List<Field> fields = ClassUtil.allFields(clazz);
+        if (CollUtil.isEmpty(fields)) {
+            return data;
+        }
         for (Field field : fields) {
             String fieldName = field.getName();
             Object value = map.get(fieldName);
@@ -103,7 +106,6 @@ public final class BeanUtil {
         if (CollUtil.isEmpty(fields)) {
             return new HashMap<>();
         }
-
         Map<String, Object> result = new HashMap<>();
         for (Field field : fields) {
             field.setAccessible(true);
@@ -130,6 +132,9 @@ public final class BeanUtil {
         }
         List<Field> srcFields = ClassUtil.allFields(srcObj.getClass());
         List<Field> aimFields = ClassUtil.allFields(aimObj.getClass());
+        if (CollUtil.isEmpty(srcFields) || CollUtil.isEmpty(aimFields)) {
+            return;
+        }
         Map<String, Field> srcMap = srcFields.stream().collect(Collectors.toMap(Field::getName, it -> it));
         for (Field aimField : aimFields) {
             if (ignore.contains(aimField.getName())) {
