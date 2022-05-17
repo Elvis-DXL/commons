@@ -37,10 +37,13 @@ public final class BeanUtil {
      * @param obj 目标对象
      * @return 结果
      */
-    public static Boolean allFieldNull(Object obj) {
+    public static <T> Boolean allFieldNull(T obj) {
         try {
             Class<?> clazz = obj.getClass();
             List<Field> fields = ClassUtil.allFields(clazz);
+            if (CollUtil.isEmpty(fields)) {
+                return Boolean.TRUE;
+            }
             for (Field field : fields) {
                 field.setAccessible(true);
                 Object value = field.get(obj);
