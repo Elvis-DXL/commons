@@ -49,13 +49,13 @@ public final class BeanUtil {
                 Object value = field.get(obj);
                 field.setAccessible(false);
                 if (null != value) {
-                    return false;
+                    return Boolean.FALSE;
                 }
             }
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
-        return true;
+        return Boolean.TRUE;
     }
 
     public static <T> List<T> mapToBean(List<Map<String, Object>> mapList, Class<T> clazz) {
