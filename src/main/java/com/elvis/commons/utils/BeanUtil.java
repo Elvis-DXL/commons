@@ -95,6 +95,31 @@ public final class BeanUtil {
         return data;
     }
 
+    public static <T> Map<String, Object> beanToMap(T aimObj) {
+        List<Field> fields = ClassUtil.allFields(aimObj.getClass());
+        if (CollUtil.isEmpty(fields)) {
+            return new HashMap<>();
+        }
+
+        Map<String, Object> result = new HashMap<>();
+        for (Field field : fields) {
+            field.setAccessible(true);
+            Object value = null;
+            try {
+                value = field.get(aimObj);
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+            field.setAccessible(false);
+            if (null == value) {
+                continue;
+            }
+            result.put(field.getName(), value);
+        }
+
+        return result;
+    }
+
     public static void copyFields(Object srcObj, Object aimObj, String... ignoreFields) {
         List<String> ignore = new ArrayList<>();
         if (null != ignoreFields && ignoreFields.length > 0) {
