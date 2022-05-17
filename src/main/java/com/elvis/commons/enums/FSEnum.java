@@ -30,6 +30,17 @@ public enum FSEnum {
     EMF(".emf"),
     EPS(".eps"),
     TGA(".tga"),
+    AVI(".avi"),
+    MOV(".mov"),
+    ASF(".asf"),
+    WMV(".wmv"),
+    NAVI(".navi"),
+    GP3(".3gp"),
+    RA(".ra"),
+    RAM(".ram"),
+    MKV(".mkv"),
+    FLV(".flv"),
+    RMVB(".rmvb"),
 
     //定义结束
     ;
@@ -79,5 +90,9 @@ public enum FSEnum {
 
     public static Boolean isImage(String fileName) {
         return isAnyOne(fileName, JPG, JPEG, PNG, BMP, GIF, TIFF, PSD, SVG, PCX, DXF, WMF, EMF, EPS, TGA);
+    }
+
+    public static Boolean isVideo(String fileName) {
+        return isAnyOne(fileName, AVI, MOV, ASF, WMV, NAVI, GP3, RA, RAM, MKV, FLV, RMVB);
     }
 }
