@@ -152,9 +152,6 @@ public final class BeanUtil {
                 e.printStackTrace();
             }
             srcField.setAccessible(false);
-            if (null == val) {
-                continue;
-            }
             aimField.setAccessible(true);
             try {
                 aimField.set(aimObj, val);
