@@ -14,6 +14,7 @@ public enum SymEnum {
     DH(","),
     FH(";"),
     XHX("_"),
+    ZHX("-"),
     YWD("."),
     BFH("%"),
     MYF("$"),
