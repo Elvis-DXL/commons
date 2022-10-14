@@ -8,9 +8,9 @@ import java.lang.annotation.*;
  * @author : Elvis
  * @since : 2021/11/24 16:38
  */
+@Inherited
 @Documented
 @Target({ElementType.FIELD})
-@Inherited
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ListMerge {
 

@@ -11,9 +11,9 @@ import java.lang.annotation.*;
  * @author : Elvis
  * @since : 2021/12/21 13:47
  */
+@Inherited
 @Documented
 @Target({ElementType.FIELD})
-@Inherited
 @Retention(RetentionPolicy.RUNTIME)
 public @interface JsonTrans {
 
