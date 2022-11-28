@@ -65,7 +65,7 @@ public final class ManualPage<T> implements Serializable {
         return result;
     }
 
-    public static <T, K> ManualPage<K> manualPage(List<T> data, int pageNum, int pageSize, Class<K> clazz) {
+    public static <M, K> ManualPage<K> manualPage(List<M> data, int pageNum, int pageSize, Class<K> clazz) {
         List<K> listData = CollUtil.classChange(data, clazz);
         return manualPage(listData, pageNum, pageSize);
     }
