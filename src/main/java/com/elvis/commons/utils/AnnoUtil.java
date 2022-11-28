@@ -240,8 +240,7 @@ public final class AnnoUtil {
             srtField.setAccessible(true);
             try {
                 srtField.set(obj, jttEnum.equals(JTTEnum.OBJ) ?
-                        JSONObject.parseObject(fieldValue, objClass)
-                        : JSONObject.parseArray(fieldValue, objClass));
+                        JSONObject.parseObject(fieldValue, objClass) : JSONObject.parseArray(fieldValue, objClass));
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
             }
