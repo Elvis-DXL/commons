@@ -1,6 +1,7 @@
 package com.elvis.commons.utils;
 
 import com.alibaba.fastjson.JSONObject;
+import com.elvis.commons.anno.Encryption;
 import com.elvis.commons.anno.JsonTrans;
 import com.elvis.commons.anno.ListMerge;
 import com.elvis.commons.enums.JTTEnum;
@@ -285,6 +286,108 @@ public final class AnnoUtil {
             field.setAccessible(true);
             try {
                 field.set(obj, JSONObject.toJSONString(object));
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+            field.setAccessible(false);
+        }
+    }
+
+    public static <T> void encodeEncryption(List<T> objList) {
+        if (CollUtil.isEmpty(objList)) {
+            return;
+        }
+        Iterator<T> iterator = objList.iterator();
+        while (iterator.hasNext()) {
+            encodeEncryption(iterator.next());
+        }
+    }
+
+    public static <T> void decodeEncryption(List<T> objList) {
+        if (CollUtil.isEmpty(objList)) {
+            return;
+        }
+        Iterator<T> iterator = objList.iterator();
+        while (iterator.hasNext()) {
+            decodeEncryption(iterator.next());
+        }
+    }
+
+    public static <T> void encodeEncryption(T obj) {
+        if (null == obj) {
+            return;
+        }
+        Class<?> clazz = obj.getClass();
+        List<Field> fields = ClassUtil.allFields(clazz);
+        if (CollUtil.isEmpty(fields)) {
+            return;
+        }
+        for (Field field : fields) {
+            Encryption encryption = field.getAnnotation(Encryption.class);
+            if (null == encryption) {
+                continue;
+            }
+            field.setAccessible(true);
+            String fieldValue = null;
+            try {
+                fieldValue = (String) field.get(obj);
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+            if (StrUtil.isEmpty(fieldValue)) {
+                field.setAccessible(false);
+                continue;
+            }
+            String secretKey = encryption.secretKey();
+            if (StrUtil.isEmpty(secretKey)) {
+                field.setAccessible(false);
+                continue;
+            }
+            EncryptUtil encryptUtil = new EncryptUtil(secretKey);
+            String encodeStr = encryptUtil.encode(fieldValue);
+            try {
+                field.set(obj, encodeStr);
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+            field.setAccessible(false);
+        }
+    }
+
+    public static <T> void decodeEncryption(T obj) {
+        if (null == obj) {
+            return;
+        }
+        Class<?> clazz = obj.getClass();
+        List<Field> fields = ClassUtil.allFields(clazz);
+        if (CollUtil.isEmpty(fields)) {
+            return;
+        }
+        for (Field field : fields) {
+            Encryption encryption = field.getAnnotation(Encryption.class);
+            if (null == encryption) {
+                continue;
+            }
+            field.setAccessible(true);
+            String fieldValue = null;
+            try {
+                fieldValue = (String) field.get(obj);
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+            if (StrUtil.isEmpty(fieldValue)) {
+                field.setAccessible(false);
+                continue;
+            }
+            String secretKey = encryption.secretKey();
+            if (StrUtil.isEmpty(secretKey)) {
+                field.setAccessible(false);
+                continue;
+            }
+            EncryptUtil encryptUtil = new EncryptUtil(secretKey);
+            String decodeStr = encryptUtil.decode(fieldValue);
+            try {
+                field.set(obj, decodeStr);
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
             }
