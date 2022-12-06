@@ -161,4 +161,10 @@ public final class BeanUtil {
             aimField.setAccessible(false);
         }
     }
+
+    public static <T, K> T newByObj(K srcObj, Class<T> clazz) {
+        T aimObj = newInstance(clazz);
+        copyFields(srcObj, aimObj);
+        return aimObj;
+    }
 }
