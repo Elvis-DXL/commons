@@ -47,7 +47,7 @@ public final class ExcelUtil {
     public static <T> void exportExcel(List<T> dataList, Class<T> clazz,
                                        String fileName, String sheetName,
                                        HttpServletRequest request, HttpServletResponse response) {
-        fileName = fileName + FSEnum.XLS.suffix();
+        fileName = fileName + FSEnum.XLSX.suffix();
         fileName = DownloadUtil.encodeDownloadFileName(fileName, request);
         response.setCharacterEncoding("UTF-8");
         response.setContentType("application/vnd.ms-excel");
@@ -71,6 +71,36 @@ public final class ExcelUtil {
             public void doAfterAllAnalysed(AnalysisContext analysisContext) {
             }
         }).sheet().doRead();
+        return result;
+    }
+
+    public static <T> List<T> excelToList(InputStream inStream, Class<T> clazz, Integer sheetIndex) {
+        List<T> result = new ArrayList<>();
+        EasyExcelFactory.read(inStream, clazz, new AnalysisEventListener<T>() {
+            @Override
+            public void invoke(T rowDTO, AnalysisContext analysisContext) {
+                result.add(rowDTO);
+            }
+
+            @Override
+            public void doAfterAllAnalysed(AnalysisContext analysisContext) {
+            }
+        }).sheet(sheetIndex).doRead();
+        return result;
+    }
+
+    public static <T> List<T> excelToList(InputStream inStream, Class<T> clazz, String sheetName) {
+        List<T> result = new ArrayList<>();
+        EasyExcelFactory.read(inStream, clazz, new AnalysisEventListener<T>() {
+            @Override
+            public void invoke(T rowDTO, AnalysisContext analysisContext) {
+                result.add(rowDTO);
+            }
+
+            @Override
+            public void doAfterAllAnalysed(AnalysisContext analysisContext) {
+            }
+        }).sheet(sheetName).doRead();
         return result;
     }
 
