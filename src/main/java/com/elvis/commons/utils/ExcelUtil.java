@@ -1,9 +1,13 @@
 package com.elvis.commons.utils;
 
+import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.EasyExcelFactory;
+import com.alibaba.excel.ExcelWriter;
 import com.alibaba.excel.context.AnalysisContext;
 import com.alibaba.excel.event.AnalysisEventListener;
+import com.alibaba.excel.write.metadata.WriteSheet;
 import com.elvis.commons.enums.FSEnum;
+import com.elvis.commons.pojo.MultipleSheetExport;
 import org.apache.poi.ss.usermodel.Workbook;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,13 +29,18 @@ public final class ExcelUtil {
     private ExcelUtil() {
     }
 
-    public static void exportExcel(Workbook wb, String fileName,
-                                   HttpServletRequest request, HttpServletResponse response) {
-        fileName = fileName + FSEnum.XLS.suffix();
+    private static void dealWebExportExcelRespHeader(String fileName,
+                                                     HttpServletRequest request, HttpServletResponse response) {
+        fileName = fileName + FSEnum.XLSX.suffix();
         fileName = DownloadUtil.encodeDownloadFileName(fileName, request);
         response.setCharacterEncoding("UTF-8");
         response.setContentType("application/vnd.ms-excel");
         response.setHeader("Content-disposition", "attachment;filename=" + fileName);
+    }
+
+    public static void exportExcel(Workbook wb, String fileName,
+                                   HttpServletRequest request, HttpServletResponse response) {
+        dealWebExportExcelRespHeader(fileName, request, response);
         OutputStream out = null;
         try {
             out = response.getOutputStream();
@@ -47,13 +56,19 @@ public final class ExcelUtil {
     public static <T> void exportExcel(List<T> dataList, Class<T> clazz,
                                        String fileName, String sheetName,
                                        HttpServletRequest request, HttpServletResponse response) {
-        fileName = fileName + FSEnum.XLSX.suffix();
-        fileName = DownloadUtil.encodeDownloadFileName(fileName, request);
-        response.setCharacterEncoding("UTF-8");
-        response.setContentType("application/vnd.ms-excel");
-        response.setHeader("Content-disposition", "attachment;filename=" + fileName);
+        dealWebExportExcelRespHeader(fileName, request, response);
         try {
             listToExcel(dataList, clazz, sheetName, response.getOutputStream());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void multipleSheetExportExcel(List<MultipleSheetExport> dataList, String fileName,
+                                                HttpServletRequest request, HttpServletResponse response) {
+        dealWebExportExcelRespHeader(fileName, request, response);
+        try {
+            multipleSheetExportExcel(dataList, response.getOutputStream());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -108,4 +123,15 @@ public final class ExcelUtil {
         EasyExcelFactory.write(outStream, clazz).sheet(sheetName).doWrite(dataList);
     }
 
+    public static void multipleSheetExportExcel(List<MultipleSheetExport> dataList, OutputStream outStream) {
+        if (CollUtil.isEmpty(dataList)) {
+            return;
+        }
+        ExcelWriter excelWriter = EasyExcel.write(outStream).build();
+        for (MultipleSheetExport item : dataList) {
+            WriteSheet sheet = EasyExcel.writerSheet(item.getSheetName()).head(item.getClazz()).build();
+            excelWriter.write(item.getData(), sheet);
+        }
+        excelWriter.finish();
+    }
 }
