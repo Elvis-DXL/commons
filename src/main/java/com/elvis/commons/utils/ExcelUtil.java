@@ -29,8 +29,8 @@ public final class ExcelUtil {
     private ExcelUtil() {
     }
 
-    private static void dealWebExportExcelRespHeader(String fileName,
-                                                     HttpServletRequest request, HttpServletResponse response) {
+    private static void dealWebExportExcelResponseHeader(String fileName,
+                                                         HttpServletRequest request, HttpServletResponse response) {
         fileName = fileName + FSEnum.XLSX.suffix();
         fileName = DownloadUtil.encodeDownloadFileName(fileName, request);
         response.setCharacterEncoding("UTF-8");
@@ -40,7 +40,7 @@ public final class ExcelUtil {
 
     public static void exportExcel(Workbook wb, String fileName,
                                    HttpServletRequest request, HttpServletResponse response) {
-        dealWebExportExcelRespHeader(fileName, request, response);
+        dealWebExportExcelResponseHeader(fileName, request, response);
         OutputStream out = null;
         try {
             out = response.getOutputStream();
@@ -56,7 +56,7 @@ public final class ExcelUtil {
     public static <T> void exportExcel(List<T> dataList, Class<T> clazz,
                                        String fileName, String sheetName,
                                        HttpServletRequest request, HttpServletResponse response) {
-        dealWebExportExcelRespHeader(fileName, request, response);
+        dealWebExportExcelResponseHeader(fileName, request, response);
         try {
             listToExcel(dataList, clazz, sheetName, response.getOutputStream());
         } catch (IOException e) {
@@ -66,7 +66,7 @@ public final class ExcelUtil {
 
     public static void multipleSheetExportExcel(List<MultipleSheetExport> dataList, String fileName,
                                                 HttpServletRequest request, HttpServletResponse response) {
-        dealWebExportExcelRespHeader(fileName, request, response);
+        dealWebExportExcelResponseHeader(fileName, request, response);
         try {
             multipleSheetExportExcel(dataList, response.getOutputStream());
         } catch (IOException e) {
