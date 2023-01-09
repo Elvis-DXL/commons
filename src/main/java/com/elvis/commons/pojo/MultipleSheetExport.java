@@ -18,10 +18,13 @@ import java.util.List;
 @AllArgsConstructor
 @ApiModel("MultipleSheetExport|多Sheet导出")
 public final class MultipleSheetExport<T> implements Serializable {
+
     @ApiModelProperty("数据")
     private List<T> data;
+
     @ApiModelProperty("类")
     private Class<T> clazz;
+
     @ApiModelProperty("Sheet名称")
     private String sheetName;
 }

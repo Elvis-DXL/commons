@@ -18,14 +18,19 @@ import java.util.List;
 @Data
 @ApiModel("ManualPage|手动分页对象")
 public final class ManualPage<T> implements Serializable {
+
     @ApiModelProperty("页码")
     private int pageNum;
+
     @ApiModelProperty("每页条数")
     private int pageSize;
+
     @ApiModelProperty("总条数")
     private int totalNum;
+
     @ApiModelProperty("总页数")
     private int totalPage;
+
     @ApiModelProperty("分页后的数据")
     private List<T> pageData;
 
