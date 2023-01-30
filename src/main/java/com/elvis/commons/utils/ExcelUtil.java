@@ -58,23 +58,23 @@ public final class ExcelUtil {
                                        HttpServletRequest request, HttpServletResponse response) {
         dealWebExportExcelResponseHeader(fileName, request, response);
         try {
-            listToExcel(dataList, clazz, sheetName, response.getOutputStream());
+            dataToExcel(dataList, clazz, sheetName, response.getOutputStream());
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public static void multipleSheetExportExcel(List<MultipleSheetExport> dataList, String fileName,
-                                                HttpServletRequest request, HttpServletResponse response) {
+    public static void exportExcel(List<MultipleSheetExport> dataList, String fileName,
+                                   HttpServletRequest request, HttpServletResponse response) {
         dealWebExportExcelResponseHeader(fileName, request, response);
         try {
-            multipleSheetExportExcel(dataList, response.getOutputStream());
+            dataToExcel(dataList, response.getOutputStream());
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public static <T> List<T> excelToList(InputStream inStream, Class<T> clazz) {
+    public static <T> List<T> excelToData(InputStream inStream, Class<T> clazz) {
         List<T> result = new ArrayList<>();
         EasyExcelFactory.read(inStream, clazz, new AnalysisEventListener<T>() {
             @Override
@@ -89,7 +89,7 @@ public final class ExcelUtil {
         return result;
     }
 
-    public static <T> List<T> excelToList(InputStream inStream, Class<T> clazz, Integer sheetIndex) {
+    public static <T> List<T> excelToData(InputStream inStream, Class<T> clazz, Integer sheetIndex) {
         List<T> result = new ArrayList<>();
         EasyExcelFactory.read(inStream, clazz, new AnalysisEventListener<T>() {
             @Override
@@ -104,7 +104,7 @@ public final class ExcelUtil {
         return result;
     }
 
-    public static <T> List<T> excelToList(InputStream inStream, Class<T> clazz, String sheetName) {
+    public static <T> List<T> excelToData(InputStream inStream, Class<T> clazz, String sheetName) {
         List<T> result = new ArrayList<>();
         EasyExcelFactory.read(inStream, clazz, new AnalysisEventListener<T>() {
             @Override
@@ -119,11 +119,11 @@ public final class ExcelUtil {
         return result;
     }
 
-    public static <T> void listToExcel(List<T> dataList, Class<T> clazz, String sheetName, OutputStream outStream) {
+    public static <T> void dataToExcel(List<T> dataList, Class<T> clazz, String sheetName, OutputStream outStream) {
         EasyExcelFactory.write(outStream, clazz).sheet(sheetName).doWrite(dataList);
     }
 
-    public static void multipleSheetExportExcel(List<MultipleSheetExport> dataList, OutputStream outStream) {
+    public static void dataToExcel(List<MultipleSheetExport> dataList, OutputStream outStream) {
         if (CollUtil.isEmpty(dataList)) {
             return;
         }
