@@ -10,11 +10,13 @@ import com.alibaba.excel.write.metadata.WriteSheet;
 import com.elvis.commons.enums.FSEnum;
 import com.elvis.commons.pojo.MultipleSheetExport;
 import org.apache.poi.hssf.usermodel.HSSFClientAnchor;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.ClientAnchor;
 import org.apache.poi.ss.usermodel.Drawing;
+import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.CellRangeAddress;
+import org.apache.poi.xssf.usermodel.XSSFClientAnchor;
 import sun.misc.BASE64Decoder;
 
 import javax.servlet.http.HttpServletRequest;
@@ -38,7 +40,6 @@ public final class ExcelUtil {
 
     private static void dealWebExportExcelResponseHeader(String fileName,
                                                          HttpServletRequest request, HttpServletResponse response) {
-        fileName = fileName + FSEnum.XLSX.suffix();
         fileName = DownloadUtil.encodeDownloadFileName(fileName, request);
         response.setCharacterEncoding("UTF-8");
         response.setContentType("application/vnd.ms-excel");
@@ -47,6 +48,13 @@ public final class ExcelUtil {
 
     public static void exportExcel(Workbook wb, String fileName,
                                    HttpServletRequest request, HttpServletResponse response) {
+        if (null == wb) {
+            throw new IllegalArgumentException("wb must not be null");
+        }
+
+        fileName = wb instanceof HSSFWorkbook ?
+                (fileName + FSEnum.XLS.suffix()) : (fileName + FSEnum.XLSX.suffix());
+
         dealWebExportExcelResponseHeader(fileName, request, response);
         OutputStream out = null;
         try {
@@ -63,7 +71,7 @@ public final class ExcelUtil {
     public static <T> void exportExcel(List<T> dataList, Class<T> clazz,
                                        String fileName, String sheetName,
                                        HttpServletRequest request, HttpServletResponse response) {
-        dealWebExportExcelResponseHeader(fileName, request, response);
+        dealWebExportExcelResponseHeader(fileName + FSEnum.XLSX.suffix(), request, response);
         try {
             dataToExcel(dataList, clazz, sheetName, response.getOutputStream());
         } catch (IOException e) {
@@ -73,7 +81,7 @@ public final class ExcelUtil {
 
     public static void exportExcel(List<MultipleSheetExport> dataList, String fileName,
                                    HttpServletRequest request, HttpServletResponse response) {
-        dealWebExportExcelResponseHeader(fileName, request, response);
+        dealWebExportExcelResponseHeader(fileName + FSEnum.XLSX.suffix(), request, response);
         try {
             dataToExcel(dataList, response.getOutputStream());
         } catch (IOException e) {
@@ -142,11 +150,11 @@ public final class ExcelUtil {
         excelWriter.finish();
     }
 
-    public static void cellMerge(HSSFSheet sheet, int firstRow, int lastRow, int firstCol, int lastCol) {
+    public static void cellMerge(Sheet sheet, int firstRow, int lastRow, int firstCol, int lastCol) {
         sheet.addMergedRegion(new CellRangeAddress(firstRow, lastRow, firstCol, lastCol));
     }
 
-    public static void addImage(Workbook wb, HSSFSheet sheet, int firstRow, int lastRow, int firstCol, int lastCol,
+    public static void addImage(Workbook wb, Sheet sheet, int firstRow, int lastRow, int firstCol, int lastCol,
                                 String imgStr) {
         if (StringUtils.isEmpty(imgStr)) {
             return;
@@ -155,8 +163,11 @@ public final class ExcelUtil {
         sheet.createRow(firstRow);
         cellMerge(sheet, firstRow, lastRow, firstCol, lastCol);
         Drawing drawingPatriarch = sheet.createDrawingPatriarch();
-        HSSFClientAnchor anchor = new HSSFClientAnchor(0, 0, 0, 0,
-                (short) firstCol, firstRow, (short) (lastCol + 1), lastRow + 1);
+
+        ClientAnchor anchor = wb instanceof HSSFWorkbook ?
+                new HSSFClientAnchor(0, 0, 0, 0, (short) firstCol, firstRow, (short) (lastCol + 1), lastRow + 1)
+                : new XSSFClientAnchor(0, 0, 0, 0, (short) firstCol, firstRow, (short) (lastCol + 1), lastRow + 1);
+
         String[] arr = imgStr.split("base64,");
         byte[] buffer = new byte[0];
         try {
@@ -164,7 +175,7 @@ public final class ExcelUtil {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        drawingPatriarch.createPicture(anchor, wb.addPicture(buffer, HSSFWorkbook.PICTURE_TYPE_JPEG));
+        drawingPatriarch.createPicture(anchor, wb.addPicture(buffer, Workbook.PICTURE_TYPE_JPEG));
     }
 
 }
