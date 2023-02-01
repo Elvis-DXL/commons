@@ -5,10 +5,17 @@ import com.alibaba.excel.EasyExcelFactory;
 import com.alibaba.excel.ExcelWriter;
 import com.alibaba.excel.context.AnalysisContext;
 import com.alibaba.excel.event.AnalysisEventListener;
+import com.alibaba.excel.util.StringUtils;
 import com.alibaba.excel.write.metadata.WriteSheet;
 import com.elvis.commons.enums.FSEnum;
 import com.elvis.commons.pojo.MultipleSheetExport;
+import org.apache.poi.hssf.usermodel.HSSFClientAnchor;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Drawing;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.util.CellRangeAddress;
+import sun.misc.BASE64Decoder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -134,4 +141,30 @@ public final class ExcelUtil {
         }
         excelWriter.finish();
     }
+
+    public static void cellMerge(HSSFSheet sheet, int firstRow, int lastRow, int firstCol, int lastCol) {
+        sheet.addMergedRegion(new CellRangeAddress(firstRow, lastRow, firstCol, lastCol));
+    }
+
+    public static void addImage(Workbook wb, HSSFSheet sheet, int firstRow, int lastRow, int firstCol, int lastCol,
+                                String imgStr) {
+        if (StringUtils.isEmpty(imgStr)) {
+            return;
+        }
+        BASE64Decoder decoder = new BASE64Decoder();
+        sheet.createRow(firstRow);
+        cellMerge(sheet, firstRow, lastRow, firstCol, lastCol);
+        Drawing drawingPatriarch = sheet.createDrawingPatriarch();
+        HSSFClientAnchor anchor = new HSSFClientAnchor(0, 0, 0, 0,
+                (short) firstCol, firstRow, (short) (lastCol + 1), lastRow + 1);
+        String[] arr = imgStr.split("base64,");
+        byte[] buffer = new byte[0];
+        try {
+            buffer = decoder.decodeBuffer(arr[1]);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        drawingPatriarch.createPicture(anchor, wb.addPicture(buffer, HSSFWorkbook.PICTURE_TYPE_JPEG));
+    }
+
 }
