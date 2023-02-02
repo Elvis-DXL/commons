@@ -20,6 +20,7 @@ public enum SymEnum {
     MYF("$"),
     RMB("￥"),
     ADF("@"),
+    ZXX("/"),
 
     //定义结束
     ;
