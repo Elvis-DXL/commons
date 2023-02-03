@@ -6,6 +6,8 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
+ * 类工具集
+ *
  * @author : Elvis
  * @since : 2022/4/27 14:13
  */
