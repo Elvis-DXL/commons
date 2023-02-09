@@ -116,9 +116,6 @@ public final class BeanUtil {
                 e.printStackTrace();
             }
             field.setAccessible(false);
-            if (null == value) {
-                continue;
-            }
             result.put(field.getName(), value);
         }
 
