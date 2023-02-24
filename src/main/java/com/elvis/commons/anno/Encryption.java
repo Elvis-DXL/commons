@@ -3,6 +3,8 @@ package com.elvis.commons.anno;
 import java.lang.annotation.*;
 
 /**
+ * 字段对称加密注解
+ *
  * @author : Elvis
  * @since : 2022/11/29 09:27
  */
