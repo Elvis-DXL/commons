@@ -1,6 +1,7 @@
 package com.elvis.commons.utils;
 
 import com.alibaba.fastjson.JSONObject;
+import com.elvis.commons.anno.Desensitization;
 import com.elvis.commons.anno.Encryption;
 import com.elvis.commons.anno.JsonTrans;
 import com.elvis.commons.anno.ListMerge;
@@ -388,6 +389,62 @@ public final class AnnoUtil {
             String decodeStr = encryptUtil.decode(fieldValue);
             try {
                 field.set(obj, decodeStr);
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+            field.setAccessible(false);
+        }
+    }
+
+    public static <T> void desensitization(List<T> objList) {
+        if (CollUtil.isEmpty(objList)) {
+            return;
+        }
+        Iterator<T> iterator = objList.iterator();
+        while (iterator.hasNext()) {
+            desensitization(iterator.next());
+        }
+    }
+
+    public static <T> void desensitization(T obj) {
+        if (null == obj) {
+            return;
+        }
+        Class<?> clazz = obj.getClass();
+        List<Field> fields = ClassUtil.allFields(clazz);
+        if (CollUtil.isEmpty(fields)) {
+            return;
+        }
+        for (Field field : fields) {
+            Desensitization desensitization = field.getAnnotation(Desensitization.class);
+            if (null == desensitization) {
+                continue;
+            }
+            field.setAccessible(true);
+            String fieldValue = null;
+            try {
+                fieldValue = (String) field.get(obj);
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+            if (StrUtil.isEmpty(fieldValue)) {
+                field.setAccessible(false);
+                continue;
+            }
+            int start = desensitization.start();
+            int end = desensitization.end();
+            if (fieldValue.length() < (start + end)) {
+                field.setAccessible(false);
+                continue;
+            }
+            int mid = desensitization.mid();
+            String midStr = "";
+            while (midStr.length() < mid) {
+                midStr = midStr.concat("*");
+            }
+            String result = fieldValue.substring(0, start) + midStr + fieldValue.substring(fieldValue.length() - end);
+            try {
+                field.set(obj, result);
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
             }
