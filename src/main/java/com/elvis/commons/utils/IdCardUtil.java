@@ -30,7 +30,13 @@ public final class IdCardUtil {
     public static int currAge(String idCardNumber) {
         int bornYear = Integer.parseInt(idCardNumber.substring(6, 10));
         int currYear = DateUtil.get(new Date(), Calendar.YEAR);
-        return currYear - bornYear;
+        return Math.max(currYear - bornYear, 0);
+    }
+
+    public static int dateAge(String idCardNumber, Date date) {
+        int bornYear = Integer.parseInt(idCardNumber.substring(6, 10));
+        int dateYear = DateUtil.get(date, Calendar.YEAR);
+        return Math.max(dateYear - bornYear, 0);
     }
 
     public static int sex(String idCardNumber) {
