@@ -28,9 +28,7 @@ public final class IdCardUtil {
     }
 
     public static int currAge(String idCardNumber) {
-        int bornYear = Integer.parseInt(idCardNumber.substring(6, 10));
-        int currYear = DateUtil.get(new Date(), Calendar.YEAR);
-        return Math.max(currYear - bornYear, 0);
+        return dateAge(idCardNumber, new Date());
     }
 
     public static int dateAge(String idCardNumber, Date date) {
