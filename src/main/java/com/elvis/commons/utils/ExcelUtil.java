@@ -43,6 +43,7 @@ public final class ExcelUtil {
         fileName = DownloadUtil.encodeDownloadFileName(fileName, request);
         response.setCharacterEncoding("UTF-8");
         response.setContentType("application/vnd.ms-excel");
+        response.setHeader("Access-Control-Expose-Headers", "Content-disposition");
         response.setHeader("Content-disposition", "attachment;filename=" + fileName);
     }
 
