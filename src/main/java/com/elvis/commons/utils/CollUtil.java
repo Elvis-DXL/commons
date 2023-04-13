@@ -53,7 +53,7 @@ public final class CollUtil {
      * @return 字符串结果
      */
     public static String joinStr(String[] strArr, String separatorChars) {
-        if (null == strArr || strArr.length <= 0) {
+        if (null == strArr || strArr.length == 0) {
             return null;
         }
         return joinStr(Arrays.asList(strArr), separatorChars);
