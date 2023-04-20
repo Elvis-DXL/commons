@@ -25,12 +25,12 @@ public final class IOUtil {
         if (null == streams || streams.length == 0) {
             return;
         }
-        for (Closeable item : streams) {
-            if (null == item) {
+        for (Closeable stream : streams) {
+            if (null == stream) {
                 continue;
             }
             try {
-                item.close();
+                stream.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -40,23 +40,23 @@ public final class IOUtil {
     /**
      * 输入流到输出流
      *
-     * @param in  输入流
-     * @param out 输出流
+     * @param inStream  输入流
+     * @param outStream 输出流
      */
-    public static void inToOut(InputStream in, OutputStream out) {
+    public static void inToOut(InputStream inStream, OutputStream outStream) {
         byte[] cache = new byte[1024 * 1024 * 20];
         try {
-            int len = in.read(cache);
+            int len = inStream.read(cache);
             while (len > 0) {
-                out.write(cache, 0, len);
-                out.flush();
-                len = in.read(cache);
+                outStream.write(cache, 0, len);
+                outStream.flush();
+                len = inStream.read(cache);
             }
-            out.flush();
+            outStream.flush();
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            closeStream(in, out);
+            closeStream(inStream, outStream);
         }
     }
 
