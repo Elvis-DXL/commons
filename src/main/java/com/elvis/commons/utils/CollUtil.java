@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 /**
@@ -23,6 +24,13 @@ public final class CollUtil {
 
     public static boolean isNotEmpty(Collection<?> coll) {
         return !isEmpty(coll);
+    }
+
+    public static void isNotEmpty(Collection<?> coll, Consumer<Collection<?>> consumer) {
+        if (isEmpty(coll)) {
+            return;
+        }
+        consumer.accept(coll);
     }
 
     /**

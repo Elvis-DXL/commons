@@ -3,6 +3,7 @@ package com.elvis.commons.utils;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
+import java.util.function.Consumer;
 
 /**
  * 字符串工具集
@@ -33,6 +34,13 @@ public final class StrUtil {
      */
     public static boolean isNotEmpty(CharSequence cs) {
         return !isEmpty(cs);
+    }
+
+    public static void isNotEmpty(CharSequence cs, Consumer<CharSequence> consumer) {
+        if (isEmpty(cs)) {
+            return;
+        }
+        consumer.accept(cs);
     }
 
     public static boolean isEmptyIgnoreTrim(String str) {
