@@ -102,4 +102,17 @@ public final class CollUtil {
         }
         return srcList.stream().distinct().collect(Collectors.toList());
     }
+
+    /**
+     * 随机从集合中取出一个元素
+     *
+     * @param srcList 源数据集合
+     * @param <T>     泛型
+     * @return 随机取出的元素
+     * @author 慕君Dxl
+     * @createTime 2023/8/24 18:10
+     */
+    public static <T> T randomGetOne(List<T> srcList) {
+        return srcList.get((int) (Math.random() * srcList.size()));
+    }
 }
