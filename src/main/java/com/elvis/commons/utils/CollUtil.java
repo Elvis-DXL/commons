@@ -96,6 +96,15 @@ public final class CollUtil {
         return srcList;
     }
 
+    /**
+     * 集合去重
+     *
+     * @param srcList 源集合
+     * @param <T>     泛型
+     * @return 去重后集合
+     * @author 慕君Dxl
+     * @createTime 2023/8/28 15:58
+     */
     public static <T> List<T> distinct(List<T> srcList) {
         if (null == srcList) {
             return new ArrayList<>();
