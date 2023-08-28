@@ -67,6 +67,17 @@ public final class CollUtil {
         return joinStr(Arrays.asList(strArr), separatorChars);
     }
 
+    /**
+     * 集合元素类型改变
+     *
+     * @param srcList 源集合
+     * @param clazz   目标类型
+     * @param <T>     泛型
+     * @param <K>     泛型
+     * @return 结果集合
+     * @author 慕君Dxl
+     * @createTime 2023/8/28 16:03
+     */
     public static <T, K> List<T> classChange(List<K> srcList, Class<T> clazz) {
         if (isEmpty(srcList)) {
             return new ArrayList<>();
