@@ -1,6 +1,7 @@
 package com.elvis.commons.utils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.StringTokenizer;
 import java.util.function.Consumer;
@@ -126,5 +127,24 @@ public final class StrUtil {
             str = "0".concat(str);
         }
         return str;
+    }
+
+    /**
+     * 获取指定长度的随机数字字符串
+     *
+     * @param length 长度
+     * @return 随机数字字符串
+     * @Author 慕君Dxl
+     * @CreateTime 2023/10/27 11:08
+     */
+    public static String randomNumberStrByLength(int length) {
+        List<String> arrList = Arrays.asList("0", "1", "2", "3", "4", "5", "6", "7", "8", "9");
+        StringBuilder sb = new StringBuilder();
+        int count = 1;
+        while (count <= length) {
+            sb.append(arrList.get((int) (Math.random() * arrList.size())));
+            count++;
+        }
+        return sb.toString();
     }
 }
