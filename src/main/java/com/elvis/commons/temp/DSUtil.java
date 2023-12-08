@@ -2,9 +2,10 @@ package com.elvis.commons.temp;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
-public class DSUtil {
+public final class DSUtil {
     private DSUtil() {
     }
 
@@ -54,26 +55,61 @@ public class DSUtil {
     public static String ss = "ss";
     public static String SSS = "SSS";
 
-    public static SimpleDateFormat sdf(String pattern) {
-        return new SimpleDateFormat(pattern);
-    }
-
     public static String formatDate(Date date, String pattern) {
-        SimpleDateFormat sdf = new SimpleDateFormat(pattern);
-        return sdf.format(date);
+        return new SimpleDateFormat(pattern).format(date);
     }
 
     public static Date parseDate(String dateStr, String pattern) {
-        return parseDate(dateStr, new SimpleDateFormat(pattern));
-    }
-
-    private static Date parseDate(String dateStr, SimpleDateFormat sdf) {
         Date date = null;
         try {
-            date = sdf.parse(dateStr);
+            date = new SimpleDateFormat(pattern).parse(dateStr);
         } catch (ParseException e) {
             e.printStackTrace();
         }
         return date;
+    }
+
+    public static Calendar dateToCalendar(Date date) {
+        if (null == date) {
+            date = new Date();
+        }
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        return calendar;
+    }
+
+    public static Date addDate(Date date, int calendarType, int num) {
+        Calendar calendar = dateToCalendar(date);
+        calendar.add(calendarType, num);
+        return calendar.getTime();
+    }
+
+    public static String nowDateStr(String pattern) {
+        return new SimpleDateFormat(pattern).format(new Date());
+    }
+
+    public static int monthDaysByDate(Date date) {
+        Calendar calendar = dateToCalendar(date);
+        calendar.set(Calendar.DATE, 1);
+        calendar.roll(Calendar.DATE, -1);
+        return calendar.get(Calendar.DATE);
+    }
+
+    public static Date dateStartTime(Date date) {
+        Calendar calendar = dateToCalendar(date);
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+        return calendar.getTime();
+    }
+
+    public static Date dateEndTime(Date date) {
+        Calendar calendar = dateToCalendar(date);
+        calendar.set(Calendar.HOUR_OF_DAY, 23);
+        calendar.set(Calendar.MINUTE, 59);
+        calendar.set(Calendar.SECOND, 59);
+        calendar.set(Calendar.MILLISECOND, 999);
+        return calendar.getTime();
     }
 }
