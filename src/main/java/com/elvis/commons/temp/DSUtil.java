@@ -1,10 +1,13 @@
 package com.elvis.commons.temp;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class DSUtil {
     private DSUtil() {
     }
 
-    //日期格式
     public static String yyyy_MM_dd_HH_mm_ss_SSS = "yyyy-MM-dd HH:mm:ss.SSS";
     public static String yyyy_MM_dd_HH_mm_ss = "yyyy-MM-dd HH:mm:ss";
     public static String yyyy_MM_dd_HH_mm = "yyyy-MM-dd HH:mm";
@@ -51,6 +54,26 @@ public class DSUtil {
     public static String ss = "ss";
     public static String SSS = "SSS";
 
-    //工具方法
+    public static SimpleDateFormat sdf(String pattern) {
+        return new SimpleDateFormat(pattern);
+    }
 
+    public static String formatDate(Date date, String pattern) {
+        SimpleDateFormat sdf = new SimpleDateFormat(pattern);
+        return sdf.format(date);
+    }
+
+    public static Date parseDate(String dateStr, String pattern) {
+        return parseDate(dateStr, new SimpleDateFormat(pattern));
+    }
+
+    private static Date parseDate(String dateStr, SimpleDateFormat sdf) {
+        Date date = null;
+        try {
+            date = sdf.parse(dateStr);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return date;
+    }
 }
