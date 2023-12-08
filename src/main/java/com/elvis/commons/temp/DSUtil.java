@@ -1,14 +1,19 @@
 package com.elvis.commons.temp;
 
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.Date;
+import java.util.List;
+import java.util.function.Consumer;
 
 public final class DSUtil {
     private DSUtil() {
     }
 
+    //时间日期格式
     public static String yyyy_MM_dd_HH_mm_ss_SSS = "yyyy-MM-dd HH:mm:ss.SSS";
     public static String yyyy_MM_dd_HH_mm_ss = "yyyy-MM-dd HH:mm:ss";
     public static String yyyy_MM_dd_HH_mm = "yyyy-MM-dd HH:mm";
@@ -54,6 +59,9 @@ public final class DSUtil {
     public static String mm = "mm";
     public static String ss = "ss";
     public static String SSS = "SSS";
+
+    //地球平均半径(m)
+    private static final double EARTH_RADIUS = 6371393;
 
     public static String formatDate(Date date, String pattern) {
         return new SimpleDateFormat(pattern).format(date);
@@ -111,5 +119,60 @@ public final class DSUtil {
         calendar.set(Calendar.SECOND, 59);
         calendar.set(Calendar.MILLISECOND, 999);
         return calendar.getTime();
+    }
+
+    public static boolean isEmpty(CharSequence cs) {
+        return cs == null || cs.length() == 0;
+    }
+
+    public static boolean isEmpty(Collection<?> coll) {
+        return coll == null || coll.isEmpty();
+    }
+
+    public static boolean isNotEmpty(CharSequence cs) {
+        return !isEmpty(cs);
+    }
+
+    public static boolean isNotEmpty(Collection<?> coll) {
+        return !isEmpty(coll);
+    }
+
+    public static void isNotEmpty(CharSequence cs, Consumer<CharSequence> consumer) {
+        if (isEmpty(cs)) {
+            return;
+        }
+        consumer.accept(cs);
+    }
+
+    public static void isNotEmpty(Collection<?> coll, Consumer<Collection<?>> consumer) {
+        if (isEmpty(coll)) {
+            return;
+        }
+        consumer.accept(coll);
+    }
+
+    public static <T> T randomGetOne(List<T> srcList) {
+        return srcList.get((int) (Math.random() * srcList.size()));
+    }
+
+    public static Double doubleFmt(Double value, Integer num) {
+        if (value == null) {
+            return 0D;
+        }
+        if (num == null || num < 1) {
+            return value;
+        }
+        StringBuilder builder = new StringBuilder("#.");
+        for (int i = 0; i < num; i++) {
+            builder.append("0");
+        }
+        DecimalFormat df = new DecimalFormat(builder.toString());
+        return Double.parseDouble(df.format(value));
+    }
+
+    public static double getDistance(double srcLng, double srcLat, double aimLng, double aimLat) {
+        return EARTH_RADIUS * Math.acos(Math.cos(Math.toRadians(srcLat)) * Math.cos(Math.toRadians(aimLat))
+                * Math.cos(Math.toRadians(srcLng) - Math.toRadians(aimLng))
+                + Math.sin(Math.toRadians(srcLat)) * Math.sin(Math.toRadians(aimLat)));
     }
 }
