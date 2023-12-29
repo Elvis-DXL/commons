@@ -174,6 +174,19 @@ public final class DateUtil {
     }
 
     /**
+     * 获取当前时间前在当天有多少分钟
+     *
+     * @param date 时间
+     * @return 当前时间前在当天有多少分钟
+     * @Author 慕君Dxl
+     * @CreateTime 2023/12/29 16:33
+     */
+    public static int dateMinutesOfDay(Date date) {
+        Calendar calendar = dateToCalendar(date);
+        return calendar.get(Calendar.HOUR_OF_DAY) * 60 + calendar.get(Calendar.MINUTE);
+    }
+
+    /**
      * 时间对应的星期名称
      *
      * @param date 目标时间
