@@ -7,6 +7,7 @@ import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Consumer;
 
 public final class DSUtil {
@@ -152,7 +153,7 @@ public final class DSUtil {
     }
 
     public static <T> T randomGetOne(List<T> srcList) {
-        return srcList.get((int) (Math.random() * srcList.size()));
+        return srcList.get(ThreadLocalRandom.current().nextInt(srcList.size()));
     }
 
     public static Double doubleFmt(Double value, Integer num) {
