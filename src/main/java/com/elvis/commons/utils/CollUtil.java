@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
@@ -133,6 +134,6 @@ public final class CollUtil {
      * @createTime 2023/8/24 18:10
      */
     public static <T> T randomGetOne(List<T> srcList) {
-        return srcList.get((int) (Math.random() * srcList.size()));
+        return srcList.get(ThreadLocalRandom.current().nextInt(srcList.size()));
     }
 }
