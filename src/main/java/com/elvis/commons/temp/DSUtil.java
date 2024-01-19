@@ -171,9 +171,20 @@ public final class DSUtil {
         return Double.parseDouble(df.format(value));
     }
 
-    public static double getDistance(double srcLng, double srcLat, double aimLng, double aimLat) {
+    public static double lngLatDistance(double srcLng, double srcLat, double aimLng, double aimLat) {
         return EARTH_RADIUS * Math.acos(Math.cos(Math.toRadians(srcLat)) * Math.cos(Math.toRadians(aimLat))
                 * Math.cos(Math.toRadians(srcLng) - Math.toRadians(aimLng))
                 + Math.sin(Math.toRadians(srcLat)) * Math.sin(Math.toRadians(aimLat)));
+    }
+
+    public static String intToStrByLength(int num, Integer length) {
+        if (null == length) {
+            return num + "";
+        }
+        String str = num + "";
+        while (str.length() < length) {
+            str = "0".concat(str);
+        }
+        return str;
     }
 }
