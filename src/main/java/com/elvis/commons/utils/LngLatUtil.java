@@ -27,7 +27,7 @@ public final class LngLatUtil {
      * @return 距离(m)
      */
 
-    public static double getDistance(double srcLng, double srcLat, double aimLng, double aimLat) {
+    public static double distance(double srcLng, double srcLat, double aimLng, double aimLat) {
         // 经纬度（角度）转弧度。弧度用作参数，以调用Math.cos和Math.sin
         double radiansAX = Math.toRadians(srcLng); // A经弧度
         double radiansAY = Math.toRadians(srcLat); // A纬弧度
