@@ -17,7 +17,6 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFClientAnchor;
-import sun.misc.BASE64Decoder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,6 +24,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 /**
@@ -155,28 +155,18 @@ public final class ExcelUtil {
         sheet.addMergedRegion(new CellRangeAddress(firstRow, lastRow, firstCol, lastCol));
     }
 
-    public static void addImage(Workbook wb, Sheet sheet, int firstRow, int lastRow, int firstCol, int lastCol,
-                                String imgStr) {
+    public static void addImage(Workbook wb, Sheet sheet, int firstRow, int lastRow, int firstCol, int lastCol, String imgStr) {
         if (StringUtils.isEmpty(imgStr)) {
             return;
         }
-        BASE64Decoder decoder = new BASE64Decoder();
         sheet.createRow(firstRow);
         cellMerge(sheet, firstRow, lastRow, firstCol, lastCol);
         Drawing drawingPatriarch = sheet.createDrawingPatriarch();
-
         ClientAnchor anchor = wb instanceof HSSFWorkbook ?
                 new HSSFClientAnchor(0, 0, 0, 0, (short) firstCol, firstRow, (short) (lastCol + 1), lastRow + 1)
                 : new XSSFClientAnchor(0, 0, 0, 0, (short) firstCol, firstRow, (short) (lastCol + 1), lastRow + 1);
-
-        String[] arr = imgStr.split("base64,");
-        byte[] buffer = new byte[0];
-        try {
-            buffer = decoder.decodeBuffer(arr[1]);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        drawingPatriarch.createPicture(anchor, wb.addPicture(buffer, Workbook.PICTURE_TYPE_JPEG));
+        drawingPatriarch.createPicture(anchor, wb.addPicture(Base64.getDecoder().decode(imgStr.split("base64,")[1]),
+                Workbook.PICTURE_TYPE_JPEG));
     }
 
 }

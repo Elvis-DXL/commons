@@ -1,10 +1,11 @@
 package com.elvis.commons.utils;
 
-import sun.misc.BASE64Encoder;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 
 /**
  * 下载工具集
@@ -24,7 +25,7 @@ public final class DownloadUtil {
         try {
             if (agent.contains(FIREFOX)) {
                 // 火狐浏览器
-                fileName = "=?UTF-8?B?" + new BASE64Encoder().encode(fileName.getBytes("utf-8")) + "?=";
+                fileName = "=?UTF-8?B?" + Base64.getEncoder().encodeToString(fileName.getBytes(StandardCharsets.UTF_8)) + "?=";
                 fileName = fileName.replaceAll("\r\n", "");
             } else {
                 // IE及其他浏览器
